@@ -1,0 +1,2 @@
+// Delete named filters on the selected tokens/tiles
+await TokenMagic.deleteFiltersOnSelected("sparkleDress");
