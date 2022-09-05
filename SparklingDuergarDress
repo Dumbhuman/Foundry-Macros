@@ -1,0 +1,44 @@
+//The threshold on this is really set to specifically work with the Duergar_Consort tokens, but if you tweak settings I'm sure you can customize it for other uses.
+
+let params = 
+[{
+   filterType: "xbloom",
+   filterId: "sparkleDress",
+   threshold: 0.63,
+   bloomScale: 1,
+   brightness: 1,
+   blur: 0.1,
+   padding: 10,
+   quality: 15,
+   blendMode: 0,
+
+   animated:
+   {
+       blur:
+       {
+          active: true,
+          loopDuration: 900,
+          animType: "cosOscillation",
+          val1: 0.05,
+          val2: 0.8
+       },
+       bloomScale: 
+       { 
+          active: true, 
+          loopDuration: 1600, 
+          animType: "cosOscillation", 
+          val1: 0.2, 
+          val2: 1
+       },
+       threshold:  
+       { 
+          active: true, 
+          loopDuration: 2900, 
+          animType: "cosOscillation", 
+          val1: 0.63, 
+          val2: 0.99
+       }
+   }
+}];
+
+await TokenMagic.addUpdateFiltersOnSelected(params);
