@@ -1,0 +1,19 @@
+(async () => {
+	let targets = Array.from(game.user.targets);
+	if(targets.length > 0){
+		if(targets.length > 1) return ui.notification.error("Can't mount more then one token!");
+		let mount = targets[0];
+		if(token.h > mount.h) return ui.notification.error("Can't mount a token smaller than you!");
+		let newCoords = {x:token.x, y:token.y};
+		if(token.w < mount.w) newCoords.x = mount.x + ((mount.w-token.w)/2);
+		else if(token.w == mount.w) newCoords.x = mount.x;
+
+		if(token.h < mount.h) newCoords.y = mount.y + ((mount.h-token.h)/2);
+		else if(token.h == mount.h) newCoords.y = mount.y;
+		await token.document.update({x: newCoords.x, y: newCoords.y});
+		ui.chat.processMessage(`I mount this ${targets[0].name}`);
+		await tokenAttacher.attachElementToToken(token, targets[0], true);
+		await tokenAttacher.setElementsLockStatus(token, false, true);
+		await tokenAttacher.setElementsMoveConstrainedStatus(token, true, true, {type: tokenAttacher.CONSTRAINED_TYPE.TOKEN_CONSTRAINED});
+	}
+})();
